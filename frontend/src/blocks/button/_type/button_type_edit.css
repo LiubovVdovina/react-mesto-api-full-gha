@@ -1,0 +1,23 @@
+.button_type_edit {
+  background-color: transparent;
+  border: 1px solid #fff;
+  width: 24px;
+  height: 24px;
+  background-image: url('../../../images/edit-button.png');
+  aspect-ratio: 1/1;
+  padding: 0;
+}
+
+@media screen and (max-width: 924px) {
+  .button_type_edit {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .button_type_edit {
+    width: 18px;
+    height: 18px;
+  }
+}

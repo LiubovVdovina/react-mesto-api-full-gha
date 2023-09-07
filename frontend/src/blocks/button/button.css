@@ -1,0 +1,10 @@
+.button {
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+}
+
+.button:hover {
+  opacity: .6;
+  cursor: pointer;
+}

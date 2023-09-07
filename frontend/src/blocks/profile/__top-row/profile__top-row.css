@@ -1,0 +1,16 @@
+.profile__top-row {
+  margin: 0;
+  height: auto;
+  box-sizing: border-box;
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__top-row {
+    justify-content: center;
+    margin: 0;
+    gap: 10px;
+  }
+}

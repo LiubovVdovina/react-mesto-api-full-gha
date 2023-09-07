@@ -1,0 +1,16 @@
+.form__input {
+  border: none;
+  border-bottom: solid rgba(0, 0, 0, .2) 1px;
+  font-size: 14px;
+  line-height: 17px;
+  padding-bottom: 7px;
+  width: 100%;
+  margin-bottom: 5px;
+
+}
+
+.form__input:focus { 
+  outline: 2px solid #72a1f9;
+  box-shadow: 0 0 7px #72a1f9;
+  border-radius: 2px;
+}

@@ -1,0 +1,15 @@
+.card__img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 10px 10px 0 0;
+  min-height: 282px;
+  background-color: #000;
+  color: #fff;
+}
+
+.card__img:hover {
+  cursor: pointer;
+}

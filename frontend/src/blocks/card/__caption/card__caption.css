@@ -1,0 +1,9 @@
+.card__caption {
+  margin: 0;
+  display: block;
+  width: fit-content;
+  max-width: calc(100% - 42px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

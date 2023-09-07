@@ -9,6 +9,7 @@ const { errors } = require('celebrate');
 const NotFoundError = require('./errors/not-found-err');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
 const {
   createUser, login, logout,
@@ -16,7 +17,7 @@ const {
 
 const { signUpValidation, signInValidation } = require('./middlewares/validators/userValidator');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 const app = express();
 app.use(cookieParser()); // подключаем парсер кук как мидлвэр
 app.use(helmet());
@@ -24,9 +25,17 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(cors);
+
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb', { });
 
 app.use(requestLogger); // подключаем логгер запросов
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signin', signInValidation, login);
 app.post('/signup', signUpValidation, createUser);

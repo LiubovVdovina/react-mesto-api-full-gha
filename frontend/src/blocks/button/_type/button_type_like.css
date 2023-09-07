@@ -1,0 +1,16 @@
+.button_type_like {
+  display: block;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/like.svg);
+  background-size: contain;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.button_type_like:hover {
+  cursor: pointer;
+  opacity: .5; 
+}
+

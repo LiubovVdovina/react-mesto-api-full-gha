@@ -1,0 +1,12 @@
+.button_type_remove {
+  background-color: transparent;
+  background-image: url('../../../images/trash.svg');
+  background-size: 100%;
+  width: 18px;
+  height: 19.3px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  padding: 0;
+}
