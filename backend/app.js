@@ -59,7 +59,3 @@ app.use(require('./middlewares/errorHandler'));
 app.listen(PORT, () => {
   console.log('Сервер запущен');
 });
-
-process.on('uncaughtException', (err, origin) => {
-  console.log(`${origin} ${err.name} c текстом ${err.message} не была обработана. Обратите внимание!`);
-});
