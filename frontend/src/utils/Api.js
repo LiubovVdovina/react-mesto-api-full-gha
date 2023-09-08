@@ -2,7 +2,7 @@ class Api {
   constructor({ baseUrl, credentials, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
-    this._credentials = credentials;
+    this._credentials = 'include';
   }
 
   _checkResponse(res) {
@@ -14,17 +14,18 @@ class Api {
     }
   }
 
-  _request(url, { method, headers, body }) {
+  _request(url, { method, credentials, headers, body }) {
     return fetch(`${this._baseUrl}${url}`, {
       method,
       headers,
+      credentials,
       body
     })
     .then(this._checkResponse)
   }
 
   getUserInfo() {
-    return this._request('/users/me', { method: 'GET', credentials: this._credentials, headers: this._headers });
+    return this._request('/users/me', { method: 'GET', credentials: 'include', headers: this._headers });
   }
 
   sendUserInfo({ name, about }) {
@@ -32,7 +33,7 @@ class Api {
   }
 
   getInitialCards() {
-    return this._request('/cards', {method: 'GET', credentials: this._credentials, headers: this._headers});
+    return this._request('/cards', {method: 'GET', credentials: 'include', headers: this._headers});
   }
 
   sendCardInfo({ name, link }) {
@@ -56,7 +57,7 @@ class Api {
   }
 
   sendAvatarInfo(avatar) {
-    return this._request('/users/me/avatar', { method: 'PATCH', credentials: this._credentials, headers: this._headers, body: JSON.stringify(avatar)});
+    return this._request('/users/me/avatar', { method: 'PATCH', credentials: 'include', headers: this._headers, body: JSON.stringify(avatar)});
   }
 }
 

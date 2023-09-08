@@ -36,8 +36,8 @@ function App() {
     if(loggedIn) {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([userData, initialCards]) => {
-        setCurrentUser(userData);
-        setCards(initialCards)
+        setCurrentUser(userData.user);
+        setCards(initialCards.cards)
       })
       .catch((err) => console.log(err))}
   }, [loggedIn]);
@@ -68,13 +68,13 @@ function App() {
 
   function handleCardLike(card) {
 
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     api.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         setCards((state) => 
           state.map((c) => 
-            c._id === card._id ? newCard : c)
+            c._id === card._id ? newCard.card : c)
         );
       })
       .catch((err) => console.log(err))
@@ -90,7 +90,7 @@ function App() {
   function handleUpdateUser(newUserInfo) {
     api.sendUserInfo(newUserInfo)
       .then((userData) => {
-        setCurrentUser(userData);
+        setCurrentUser(userData.user);
         closeAllPopups();
       })
       .catch((err) => console.log(err))
@@ -99,7 +99,7 @@ function App() {
   function handleUpdateAvatar(newAvatar) {
     api.sendAvatarInfo(newAvatar)
       .then((userData) => {
-        setCurrentUser(userData);
+        setCurrentUser(userData.user);
         closeAllPopups();
       })
       .catch((err) => console.log(err))
@@ -108,7 +108,7 @@ function App() {
   function handleAddPlace(newPlace) {
     api.sendCardInfo(newPlace)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
+        setCards([newCard.card, ...cards]);
         closeAllPopups();
       })
       .catch((err) => console.log(err))
@@ -117,7 +117,7 @@ function App() {
   function handleLogin(email, password) {
     auth.authorize(email, password)
       .then((data) => {
-        if(data.token) {
+        if(data) {
           setLoggedIn(true);
           navigate('/', {replace: true});
         }
@@ -142,22 +142,29 @@ function App() {
 
   React.useEffect(() => {
     auth.checkToken()
-    .then((data) => {
-      if(data) {
-        setLoggedIn(true);
-          // сохранить e-mail для хэдэра
-        setUserEmail(data.data.email);
-        console.log(data);
-        navigate('/', {replace: true});
-      }
-    })
+      .then((data) => {
+        console.log('Функция auth.checkToken вернула следующие данные: ', data);
+        console.log('data.user: ', data.user);
+        console.log('data.user.email', data.user.email);
+        if(data) {
+          setLoggedIn(true);
+            // сохранить e-mail для хэдэра
+          setUserEmail(data.user.email);
+          navigate('/', {replace: true});
+        }
+      })
       .catch((err) => console.log(err))
-  }, [navigate])
+  }, [])
 
   function handleSignOut() {
-    setLoggedIn(false);
-    setUserEmail("");
-    navigate('/sign-in');
+    auth
+      .logout()
+      .then(() => {
+        setLoggedIn(false);
+        setUserEmail("");
+        navigate('/sign-in');
+      })
+      .catch((err) => console.log(err))
   }
 
   return(

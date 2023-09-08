@@ -1,7 +1,7 @@
 const allowedCors = [
   'http://mestollogy.nomoredomainsicu.ru',
-  'https://mestollogy.nomoredomainsicu.ru/',
-  'http://158.160.80.46', // ip сервера с фhонтендом
+  'https://mestollogy.nomoredomainsicu.ru',
+  'http://158.160.80.46', // ip сервера с фронтендом
   'https://158.160.80.46',
   'http://localhost:3000',
   'http://171.33.255.212', // мой статичный ip
