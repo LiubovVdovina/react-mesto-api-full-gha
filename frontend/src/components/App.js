@@ -144,9 +144,6 @@ function App() {
   React.useEffect(() => {
     auth.checkToken()
       .then((data) => {
-        console.log('Функция auth.checkToken вернула следующие данные: ', data);
-        console.log('data.user: ', data.user);
-        console.log('data.user.email', data.user.email);
         if(data) {
           setLoggedIn(true);
             // сохранить e-mail для хэдэра
